@@ -1,0 +1,16 @@
+{
+	a: true,
+	b: "Hello",
+	c: {
+		d: 12.34,
+		e: 34.56
+	}
+	f: {
+		class: 	"segment",
+		file:	"sub.json"
+	}
+	g: [
+		0.0, 0.1, 0.2, 0.3, 0.4
+	]
+}
+

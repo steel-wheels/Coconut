@@ -1,0 +1,20 @@
+{
+	persons: {
+		class:		"Table",
+		defaultFields: {
+			name:		"",
+			age:		0
+		},
+		records: [
+			{
+				name: "Nobita",
+				age:  10
+			},
+			{
+				name: "Gian",
+				age:  10
+			}
+		]
+	}
+}
+
