@@ -9,11 +9,6 @@ import Foundation
 
 public class CNReadline
 {
-        public enum ApplicationType {
-                case terminal
-                case window
-        }
-
 	private var mLine:	String
 	private var mIndex:	String.Index
 
@@ -72,7 +67,7 @@ public class CNReadline
 		self.mIndex = mLine.startIndex
 	}
 
-        public func execute(escapeCode ecode: CNEscapeCode, console cons: CNFileConsole, type typ: ApplicationType) -> String? {
+        public func execute(escapeCode ecode: CNEscapeCode, console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
                 var result: String? = nil
 
                 /* decode the command */
@@ -120,7 +115,7 @@ public class CNReadline
                 return result
         }
 
-        public func execute(console cons: CNFileConsole, type typ: ApplicationType) -> String? {
+        public func execute(console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
                 var result: String? = nil
                 switch cons.inputFile.gets() {
                 case .str(let s):
@@ -134,7 +129,9 @@ public class CNReadline
                         case .error(let err):
                                 cons.error(string: "[Error] " + err.toString() + "\n")
                         }
-                case .endOfFile, .null:
+                case .null:
+                        Thread.sleep(forTimeInterval: 0.01)
+                case .endOfFile:
                         result = "" // can not continue but no result
                 }
                 return result

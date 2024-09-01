@@ -137,6 +137,8 @@
 		05A44F1425C24D0D0086033B /* UTMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A44F1325C24D0D0086033B /* UTMatrix.swift */; };
 		05A501B526A4203E00A992F9 /* CNValueComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A501B426A4203E00A992F9 /* CNValueComparator.swift */; };
 		05A501B626A4203E00A992F9 /* CNValueComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A501B426A4203E00A992F9 /* CNValueComparator.swift */; };
+		05B0734D2C829C200002500A /* CNApplicationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B0734C2C829C200002500A /* CNApplicationType.swift */; };
+		05B0734E2C829C200002500A /* CNApplicationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B0734C2C829C200002500A /* CNApplicationType.swift */; };
 		05B32C88251501B1000D1411 /* CoconutData_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 05B32C86251501B1000D1411 /* CoconutData_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05B32C96251501D7000D1411 /* CoconutData_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 05B32C94251501D7000D1411 /* CoconutData_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05B32CAA2515025E000D1411 /* CNValueParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CA02515025E000D1411 /* CNValueParser.swift */; };
@@ -512,6 +514,7 @@
 		05A44F0D25C22B320086033B /* CNMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNMatrix.swift; sourceTree = "<group>"; };
 		05A44F1325C24D0D0086033B /* UTMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMatrix.swift; sourceTree = "<group>"; };
 		05A501B426A4203E00A992F9 /* CNValueComparator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNValueComparator.swift; sourceTree = "<group>"; };
+		05B0734C2C829C200002500A /* CNApplicationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNApplicationType.swift; sourceTree = "<group>"; };
 		05B32C83251501B1000D1411 /* CoconutData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoconutData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B32C86251501B1000D1411 /* CoconutData_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoconutData_macOS.h; sourceTree = "<group>"; };
 		05B32C87251501B1000D1411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -848,6 +851,7 @@
 		05B32CCC251502D3000D1411 /* Process */ = {
 			isa = PBXGroup;
 			children = (
+				05B0734C2C829C200002500A /* CNApplicationType.swift */,
 				0576A9DB2BCEAAF300E3664A /* CNAppearance.swift */,
 				05B32CD4251502E6000D1411 /* CNApplicationDelegate.swift */,
 				05B32CD3251502E6000D1411 /* CNEnvironment.swift */,
@@ -1375,6 +1379,7 @@
 				05B32D3D251508D9000D1411 /* CNFileHandle.swift in Sources */,
 				051ED8E425C99269003AD1F6 /* CNBitmapContext.swift in Sources */,
 				05B32CC6251502BE000D1411 /* CNFont.swift in Sources */,
+				05B0734D2C829C200002500A /* CNApplicationType.swift in Sources */,
 				05B32CC8251502BE000D1411 /* CNFontManager.swift in Sources */,
 				05B32D43251508D9000D1411 /* CNConsole.swift in Sources */,
 				058DA8192BCB529900C7955A /* CNConfig.swift in Sources */,
@@ -1501,6 +1506,7 @@
 				05BEE0EF2634E02100178484 /* CNStandardFiles.swift in Sources */,
 				05B32D3E251508D9000D1411 /* CNFileHandle.swift in Sources */,
 				051ED8E525C99269003AD1F6 /* CNBitmapContext.swift in Sources */,
+				05B0734E2C829C200002500A /* CNApplicationType.swift in Sources */,
 				05B32CC7251502BE000D1411 /* CNFont.swift in Sources */,
 				0586D132274D241600EF076D /* CNPoint.swift in Sources */,
 				058DA81A2BCB529900C7955A /* CNConfig.swift in Sources */,
