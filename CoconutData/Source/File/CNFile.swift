@@ -181,18 +181,32 @@ public class CNInputFile: CNFile
 
 	private func updateBuffer(fileHandler hdl: FileHandle) {
 		self.mLock.lock()
-		let data = hdl.availableData
-		if !data.isEmpty {
-			if let str = String(data: data, encoding: .utf8) {
-				self.mBuffer += str
-			} else {
-				CNLog(logLevel: .error, message: "Failed to decode input", atFunction: #function, inFile: #file)
-			}
-		} else {
-			hdl.readabilityHandler = nil
-			self.mReadDone = true
-		}
-		self.mLock.unlock()
+                switch mFileType {
+                case .standardIO:
+                        if hdl.hasAvailableData() {
+                                let data = hdl.availableData
+                                if !data.isEmpty {
+                                        if let str = String(data: data, encoding: .utf8) {
+                                                self.mBuffer += str
+                                        } else {
+                                                CNLog(logLevel: .error, message: "Failed to decode input", atFunction: #function, inFile: #file)
+                                        }
+                                }
+                        }
+                case .file:
+                        let data = hdl.availableData
+                        if !data.isEmpty {
+                                if let str = String(data: data, encoding: .utf8) {
+                                        self.mBuffer += str
+                                } else {
+                                        CNLog(logLevel: .error, message: "Failed to decode input", atFunction: #function, inFile: #file)
+                                }
+                        } else {
+                                hdl.readabilityHandler = nil
+                                self.mReadDone = true
+                        }
+                }
+                self.mLock.unlock()
 	}
 
 	private func getcFromBuffer() -> Char {

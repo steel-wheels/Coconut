@@ -67,7 +67,36 @@ public class CNReadline
 		self.mIndex = mLine.startIndex
 	}
 
-        public func execute(escapeCode ecode: CNEscapeCode, console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
+        public typealias ExecuteFunc = (_ line: String) -> Void
+
+        public func execute(executionFunction execfunc: ExecuteFunc, console cons: CNFileConsole, applicationType apptype: CNApplicationType) -> Bool {
+                var doloop = true
+                switch cons.inputFile.gets() {
+                case .str(let s):
+                        switch CNEscapeCode.decode(string: s) {
+                        case .ok(let codes):
+                                for code in codes {
+                                        if let str = execute(escapeCode: code, console: cons, type: apptype) {
+                                                if !str.isEmpty {
+                                                        execfunc(str)
+                                                        doloop = false
+
+                                                }
+                                        }
+                                }
+                        case .error(let err):
+                                let newline = CNEscapeCode.newline.encode()
+                                cons.error(string: "[Error] " + err.toString() + newline)
+                        }
+                case .endOfFile:
+                        doloop = false
+                case .null:
+                        Thread.sleep(forTimeInterval: 0.01)
+                }
+                return doloop
+        }
+
+        private func execute(escapeCode ecode: CNEscapeCode, console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
                 var result: String? = nil
 
                 /* decode the command */
@@ -115,7 +144,8 @@ public class CNReadline
                 return result
         }
 
-        public func execute(console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
+        /*
+        private func execute(console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
                 var result: String? = nil
                 switch cons.inputFile.gets() {
                 case .str(let s):
@@ -135,7 +165,7 @@ public class CNReadline
                         result = "" // can not continue but no result
                 }
                 return result
-        }
+        }*/
 
         private func print(string str: String, console cons: CNFileConsole){
                 /* I dont know why this interval is required */
