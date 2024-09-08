@@ -86,6 +86,14 @@ private class CNResourceElement<T>
         }
     }
 
+        public func totalCount() -> Int {
+                var result: Int = 0
+                for (_, value) in mElements {
+                        result += value.count()
+                }
+                return result
+        }
+
     public func set(identifier ident: String, at index: Int, value val: T) -> NSError? {
         if let elm = mElements[ident] {
             return elm.set(at: index, value: val)
@@ -153,6 +161,14 @@ private class CNResourceCatalog<T>
             return 0
         }
     }
+
+        public func totalCount(category cat: String) -> Int {
+                if let dict = mCatalogs[cat] {
+                    return dict.totalCount()
+                } else {
+                    return 0
+                }
+        }
 
     public func set(category cat: String, identifier ident: String, at index: Int, value val: T) -> NSError? {
         if let dict = mCatalogs[cat] {
@@ -318,6 +334,10 @@ open class CNResource
     public func countOfURLs(category cat: String, identifier ident: String) -> Int {
         return mURLResource.count(category: cat, identifier: ident)
     }
+
+        public func totalCountOfURLs(category cat: String) -> Int {
+                return mURLResource.totalCount(category: cat)
+        }
 
     public func setURL(category cat: String, identifier ident: String, at index: Int, path pth: String) -> NSError? {
         let url = mPackageDirectory.appending(path: pth)
