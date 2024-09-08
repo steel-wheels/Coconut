@@ -67,33 +67,38 @@ public class CNReadline
 		self.mIndex = mLine.startIndex
 	}
 
-        public typealias ExecuteFunc = (_ line: String) -> Void
+        public enum ExecutionResult {
+                case doContinue
+                case doExit
+                case doExecute(String)
+        }
 
-        public func execute(executionFunction execfunc: ExecuteFunc, console cons: CNFileConsole, applicationType apptype: CNApplicationType) -> Bool {
-                var doloop = true
+        public func execute(console cons: CNFileConsole, applicationType apptype: CNApplicationType) -> ExecutionResult {
+                var result: ExecutionResult
                 switch cons.inputFile.gets() {
                 case .str(let s):
                         switch CNEscapeCode.decode(string: s) {
                         case .ok(let codes):
+                                result = .doContinue
                                 for code in codes {
                                         if let str = execute(escapeCode: code, console: cons, type: apptype) {
                                                 if !str.isEmpty {
-                                                        execfunc(str)
-                                                        doloop = false
-
+                                                        result = .doExecute(str)
                                                 }
                                         }
                                 }
                         case .error(let err):
                                 let newline = CNEscapeCode.newline.encode()
                                 cons.error(string: "[Error] " + err.toString() + newline)
+                                result = .doExit
                         }
                 case .endOfFile:
-                        doloop = false
+                        result = .doExit
                 case .null:
                         Thread.sleep(forTimeInterval: 0.01)
+                        result = .doContinue
                 }
-                return doloop
+                return result
         }
 
         private func execute(escapeCode ecode: CNEscapeCode, console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
