@@ -149,29 +149,6 @@ public class CNReadline
                 return result
         }
 
-        /*
-        private func execute(console cons: CNFileConsole, type typ: CNApplicationType) -> String? {
-                var result: String? = nil
-                switch cons.inputFile.gets() {
-                case .str(let s):
-                        switch CNEscapeCode.decode(string: s) {
-                        case .ok(let codes):
-                                for code in codes {
-                                        if let str = execute(escapeCode: code, console: cons, type: typ){
-                                                result = str
-                                        }
-                                }
-                        case .error(let err):
-                                cons.error(string: "[Error] " + err.toString() + "\n")
-                        }
-                case .null:
-                        Thread.sleep(forTimeInterval: 0.01)
-                case .endOfFile:
-                        result = "" // can not continue but no result
-                }
-                return result
-        }*/
-
         private func print(string str: String, console cons: CNFileConsole){
                 /* I dont know why this interval is required */
                 cons.print(string: str)
