@@ -221,11 +221,14 @@ public class CNValueTypeManager
 		let propertiesIF = CNValueProperties.allocateInterfaceType()
 		newifs.append(propertiesIF)
 
-        let iconIF = CNIcon.allocateInterfaceType(symbolIF: symbolIF)
-        newifs.append(iconIF)
+                let readlineIF = CNReadline.allocateInterfaceType()
+                newifs.append(readlineIF)
 
-        let collectionIF = CNCollectionData.allocateInterfaceType(iconIF: iconIF)
-        newifs.append(collectionIF)
+                let iconIF = CNIcon.allocateInterfaceType(symbolIF: symbolIF)
+                newifs.append(iconIF)
+
+                let collectionIF = CNCollectionData.allocateInterfaceType(iconIF: iconIF)
+                newifs.append(collectionIF)
 
 		let escapeSequenceIF = CNEscapeSequence.allocateInterfaceType()
 		newifs.append(escapeSequenceIF)

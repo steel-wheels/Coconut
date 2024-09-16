@@ -9,11 +9,21 @@ import Foundation
 
 public class CNReadline
 {
+        private static let InterfaceName       = "ReadlineCoreIF"
+
 	private var mLine:	String
 	private var mIndex:	String.Index
 
 	public var line: String  { get { return mLine }}
 	public var isEmpty: Bool { get { return mLine.isEmpty }}
+
+        static func allocateInterfaceType() -> CNInterfaceType {
+                typealias M = CNInterfaceType.Member
+                let members: Array<M> = [
+                        M(name: "execute",                type: .functionType(.nullable(.stringType), [])),
+                ]
+                return CNInterfaceType(name: CNReadline.InterfaceName, base: nil, members: members)
+        }
 
 	public init() {
 		self.mLine     = ""
