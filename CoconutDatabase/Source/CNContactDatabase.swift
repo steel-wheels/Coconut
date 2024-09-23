@@ -197,7 +197,7 @@ public class CNContactDatabase: CNTable
 		case .authorized:
 			mState = .accessAuthorized
 			cbfunc(true)
-		case .denied:
+                case .denied, .limited:
 			mState = .accessDenied
 			cbfunc(false)
 		case .notDetermined, .restricted:
@@ -212,7 +212,7 @@ public class CNContactDatabase: CNTable
 					cbfunc(false)
 				}
 			})
-		@unknown default:
+                @unknown default:
 			CNLog(logLevel: .error, message: "Unknown case", atFunction: #function, inFile: #file)
 			mState = .accessDenied
 			cbfunc(false)

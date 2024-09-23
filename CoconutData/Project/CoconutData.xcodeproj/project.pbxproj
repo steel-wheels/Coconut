@@ -151,14 +151,8 @@
 		05B32CC7251502BE000D1411 /* CNFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CC2251502BE000D1411 /* CNFont.swift */; };
 		05B32CC8251502BE000D1411 /* CNFontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CC3251502BE000D1411 /* CNFontManager.swift */; };
 		05B32CC9251502BE000D1411 /* CNFontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CC3251502BE000D1411 /* CNFontManager.swift */; };
-		05B32CD7251502E6000D1411 /* CNOperationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CCD251502E6000D1411 /* CNOperationContext.swift */; };
-		05B32CD8251502E6000D1411 /* CNOperationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CCD251502E6000D1411 /* CNOperationContext.swift */; };
-		05B32CD9251502E6000D1411 /* CNOperationExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CCE251502E6000D1411 /* CNOperationExecutor.swift */; };
-		05B32CDA251502E6000D1411 /* CNOperationExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CCE251502E6000D1411 /* CNOperationExecutor.swift */; };
 		05B32CDD251502E7000D1411 /* CNProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CD0251502E6000D1411 /* CNProcessManager.swift */; };
 		05B32CDE251502E7000D1411 /* CNProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CD0251502E6000D1411 /* CNProcessManager.swift */; };
-		05B32CDF251502E7000D1411 /* CNOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CD1251502E6000D1411 /* CNOperationQueue.swift */; };
-		05B32CE0251502E7000D1411 /* CNOperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CD1251502E6000D1411 /* CNOperationQueue.swift */; };
 		05B32CE1251502E7000D1411 /* CNProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CD2251502E6000D1411 /* CNProcess.swift */; };
 		05B32CE2251502E7000D1411 /* CNProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CD2251502E6000D1411 /* CNProcess.swift */; };
 		05B32CE3251502E7000D1411 /* CNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32CD3251502E6000D1411 /* CNEnvironment.swift */; };
@@ -526,10 +520,7 @@
 		05B32CC1251502BE000D1411 /* CNText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNText.swift; sourceTree = "<group>"; };
 		05B32CC2251502BE000D1411 /* CNFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNFont.swift; sourceTree = "<group>"; };
 		05B32CC3251502BE000D1411 /* CNFontManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNFontManager.swift; sourceTree = "<group>"; };
-		05B32CCD251502E6000D1411 /* CNOperationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNOperationContext.swift; sourceTree = "<group>"; };
-		05B32CCE251502E6000D1411 /* CNOperationExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNOperationExecutor.swift; sourceTree = "<group>"; };
 		05B32CD0251502E6000D1411 /* CNProcessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNProcessManager.swift; sourceTree = "<group>"; };
-		05B32CD1251502E6000D1411 /* CNOperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNOperationQueue.swift; sourceTree = "<group>"; };
 		05B32CD2251502E6000D1411 /* CNProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNProcess.swift; sourceTree = "<group>"; };
 		05B32CD3251502E6000D1411 /* CNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNEnvironment.swift; sourceTree = "<group>"; };
 		05B32CD4251502E6000D1411 /* CNApplicationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNApplicationDelegate.swift; sourceTree = "<group>"; };
@@ -855,9 +846,6 @@
 				0576A9DB2BCEAAF300E3664A /* CNAppearance.swift */,
 				05B32CD4251502E6000D1411 /* CNApplicationDelegate.swift */,
 				05B32CD3251502E6000D1411 /* CNEnvironment.swift */,
-				05B32CCD251502E6000D1411 /* CNOperationContext.swift */,
-				05B32CCE251502E6000D1411 /* CNOperationExecutor.swift */,
-				05B32CD1251502E6000D1411 /* CNOperationQueue.swift */,
 				05B32CD2251502E6000D1411 /* CNProcess.swift */,
 				05B32CD0251502E6000D1411 /* CNProcessManager.swift */,
 				05B32CD6251502E6000D1411 /* CNThread.swift */,
@@ -1400,7 +1388,6 @@
 				0503EFFD2A6A2E9800FBD4D1 /* CNSpriteScene.swift in Sources */,
 				057B753629337EC800827E4A /* CNRGBColorTable.swift in Sources */,
 				05B32CAA2515025E000D1411 /* CNValueParser.swift in Sources */,
-				05B32CD7251502E6000D1411 /* CNOperationContext.swift in Sources */,
 				05A44F0225C223350086033B /* CNGraphicsContext.swift in Sources */,
 				05B32CAD2515025E000D1411 /* CNValue.swift in Sources */,
 				05430DD82A63DB0B0095647D /* CNSpriteNode.swift in Sources */,
@@ -1449,13 +1436,11 @@
 				05A44F0E25C22B320086033B /* CNMatrix.swift in Sources */,
 				05B32D16251508B5000D1411 /* CNGraphicsType.swift in Sources */,
 				05B32D8E25150946000D1411 /* CNKeyBinding.swift in Sources */,
-				05B32CD9251502E6000D1411 /* CNOperationExecutor.swift in Sources */,
 				0589C4B52A47069E00D0E2A9 /* CNValueTypeCoder.swift in Sources */,
 				05E7F00C274E8F7600938598 /* CNVectorManager.swift in Sources */,
 				0529EFDF294DE0A5000F547D /* CNNumber.swift in Sources */,
 				0504D17C2751C24900EFE0D7 /* CNOval.swift in Sources */,
 				05E3B17228B43F0000E081BF /* CNAlert.swift in Sources */,
-				05B32CDF251502E7000D1411 /* CNOperationQueue.swift in Sources */,
 				0507F9F32A6CAF2C004696EA /* CNVector.swift in Sources */,
 				05DE577829699E8400C87A31 /* CNValueInterface.swift in Sources */,
 				051A5C5C2B115FCF00708047 /* CNValueTypeParser.swift in Sources */,
@@ -1527,7 +1512,6 @@
 				0503EFFE2A6A2E9800FBD4D1 /* CNSpriteScene.swift in Sources */,
 				057B753729337EC800827E4A /* CNRGBColorTable.swift in Sources */,
 				05B32D32251508D9000D1411 /* CNFile.swift in Sources */,
-				05B32CD8251502E6000D1411 /* CNOperationContext.swift in Sources */,
 				05FDF1BA276D6350004E2781 /* CNTable.swift in Sources */,
 				05A44F0325C223350086033B /* CNGraphicsContext.swift in Sources */,
 				05430DD92A63DB0B0095647D /* CNSpriteNode.swift in Sources */,
@@ -1581,8 +1565,6 @@
 				0504D17D2751C24900EFE0D7 /* CNOval.swift in Sources */,
 				0529EFE0294DE0A5000F547D /* CNNumber.swift in Sources */,
 				05E3B17328B43F0000E081BF /* CNAlert.swift in Sources */,
-				05B32CDA251502E6000D1411 /* CNOperationExecutor.swift in Sources */,
-				05B32CE0251502E7000D1411 /* CNOperationQueue.swift in Sources */,
 				0507F9F42A6CAF2C004696EA /* CNVector.swift in Sources */,
 				05DE577929699E8400C87A31 /* CNValueInterface.swift in Sources */,
 				051A5C5D2B115FCF00708047 /* CNValueTypeParser.swift in Sources */,

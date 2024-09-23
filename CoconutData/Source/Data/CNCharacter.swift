@@ -29,16 +29,16 @@ public extension Character
 	}
 
 	/* Reference: http://jkorpela.fi/chars/c0.html */
-	static var ETX		= Character("\u{03}")
-	static var EOT		= Character("\u{04}")
-	static var BEL		= Character("\u{07}")
-	static var BS		= Character("\u{08}")
-	static var TAB		= Character("\u{09}")
-	static var LF		= Character("\u{0a}")
-	static var VT		= Character("\u{0b}")
-	static var CR		= Character("\u{0d}")
-	static var ESC		= Character("\u{1b}")
-	static var DEL		= Character("\u{7f}")
+	static let ETX		= Character("\u{03}")
+	static let EOT		= Character("\u{04}")
+	static let BEL		= Character("\u{07}")
+	static let BS		= Character("\u{08}")
+	static let TAB		= Character("\u{09}")
+	static let LF		= Character("\u{0a}")
+	static let VT		= Character("\u{0b}")
+	static let CR		= Character("\u{0d}")
+	static let ESC		= Character("\u{1b}")
+	static let DEL		= Character("\u{7f}")
 
 	var isLetterOrNumber: Bool {
 		get { return self.isLetter || self.isNumber }
