@@ -9,8 +9,6 @@ import Foundation
 
 public class CNDocumentTypeManager
 {
-	public static let shared: CNDocumentTypeManager = CNDocumentTypeManager()
-
 	private var mDocumentTypes:	Dictionary<String, Array<String>>	// UTI, extension
 
 	public init() {

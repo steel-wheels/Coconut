@@ -140,13 +140,6 @@ public class CNInputFile: CNFile
 		return result
 	}}
 
-	private func setupCallback(fileHandle hdl: FileHandle) {
-		hdl.readabilityHandler = {
-			(_ hdl: FileHandle) -> Void in
-			self.updateBuffer(fileHandler: hdl)
-		}
-	}
-
 	public override func close() {
 		guard !mClosed else {
 			return // already closesd

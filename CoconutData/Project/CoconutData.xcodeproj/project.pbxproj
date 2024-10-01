@@ -203,8 +203,6 @@
 		05B32D42251508D9000D1411 /* CNFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D27251508D9000D1411 /* CNFileManager.swift */; };
 		05B32D43251508D9000D1411 /* CNConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D28251508D9000D1411 /* CNConsole.swift */; };
 		05B32D44251508D9000D1411 /* CNConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D28251508D9000D1411 /* CNConsole.swift */; };
-		05B32D4F251508F7000D1411 /* CNAppleEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D49251508F6000D1411 /* CNAppleEventManager.swift */; };
-		05B32D50251508F7000D1411 /* CNAppleEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D49251508F6000D1411 /* CNAppleEventManager.swift */; };
 		05B32D5C25150926000D1411 /* CNExitCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D5A25150925000D1411 /* CNExitCode.swift */; };
 		05B32D5D25150926000D1411 /* CNExitCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D5A25150925000D1411 /* CNExitCode.swift */; };
 		05B32D5E25150926000D1411 /* CNError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B32D5B25150926000D1411 /* CNError.swift */; };
@@ -546,7 +544,6 @@
 		05B32D26251508D9000D1411 /* CNPropertyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNPropertyList.swift; sourceTree = "<group>"; };
 		05B32D27251508D9000D1411 /* CNFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNFileManager.swift; sourceTree = "<group>"; };
 		05B32D28251508D9000D1411 /* CNConsole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNConsole.swift; sourceTree = "<group>"; };
-		05B32D49251508F6000D1411 /* CNAppleEventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNAppleEventManager.swift; sourceTree = "<group>"; };
 		05B32D5A25150925000D1411 /* CNExitCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNExitCode.swift; sourceTree = "<group>"; };
 		05B32D5B25150926000D1411 /* CNError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNError.swift; sourceTree = "<group>"; };
 		05B32D6325150945000D1411 /* CNCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNCharacter.swift; sourceTree = "<group>"; };
@@ -790,7 +787,6 @@
 			children = (
 				05B32D622515092C000D1411 /* Data */,
 				05B32D592515090B000D1411 /* Error */,
-				05B32D47251508DE000D1411 /* Event */,
 				05B32D1A251508C0000D1411 /* File */,
 				05B32D0E2515089F000D1411 /* Graphics */,
 				05B32D0825150385000D1411 /* Math */,
@@ -939,14 +935,6 @@
 				053410722B73C89200BCDBAD /* CNUTTypeManager.swift */,
 			);
 			path = File;
-			sourceTree = "<group>";
-		};
-		05B32D47251508DE000D1411 /* Event */ = {
-			isa = PBXGroup;
-			children = (
-				05B32D49251508F6000D1411 /* CNAppleEventManager.swift */,
-			);
-			path = Event;
 			sourceTree = "<group>";
 		};
 		05B32D592515090B000D1411 /* Error */ = {
@@ -1378,7 +1366,6 @@
 				05D8A47D2AD0B78F00C33FF4 /* CNSpriteAction.swift in Sources */,
 				05B32D9425150946000D1411 /* CNStringUtil.swift in Sources */,
 				05C66A9F28E1D52C00C5F44B /* CNValueType.swift in Sources */,
-				05B32D4F251508F7000D1411 /* CNAppleEventManager.swift in Sources */,
 				0596C5792722EEF200E9A24F /* CNSymbol.swift in Sources */,
 				053410732B73C89200BCDBAD /* CNUTTypeManager.swift in Sources */,
 				05B32D8A25150945000D1411 /* CNObservedValue.swift in Sources */,
@@ -1506,7 +1493,6 @@
 				05B32D9525150946000D1411 /* CNStringUtil.swift in Sources */,
 				053410742B73C89200BCDBAD /* CNUTTypeManager.swift in Sources */,
 				05BD1FFD292E1E0E00D8D1D3 /* CNWorkspace.swift in Sources */,
-				05B32D50251508F7000D1411 /* CNAppleEventManager.swift in Sources */,
 				0594B09529CE9B2D009B683F /* CNEscapeSequence.swift in Sources */,
 				05B32D8B25150946000D1411 /* CNObservedValue.swift in Sources */,
 				0503EFFE2A6A2E9800FBD4D1 /* CNSpriteScene.swift in Sources */,

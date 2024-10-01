@@ -419,105 +419,105 @@ public class CNViewPreference: CNPreferenceTable
 	public init() {
 		super.init(sectionName: "ViewPreference")
 
-        mRootBackgroundColor        = super.loadColorValue(forKey: CNViewPreference.RootBackgroundColorItem)
-        mControlBackgroundColor     = super.loadColorValue(forKey: CNViewPreference.ControlBackgroundColorItem)
-        mLabelColor                 = super.loadColorValue(forKey: CNViewPreference.LabelColorItem)
+                mRootBackgroundColor        = super.loadColorValue(forKey: CNViewPreference.RootBackgroundColorItem)
+                mControlBackgroundColor     = super.loadColorValue(forKey: CNViewPreference.ControlBackgroundColorItem)
+                mLabelColor                 = super.loadColorValue(forKey: CNViewPreference.LabelColorItem)
 		mTextColor                  = super.loadColorValue(forKey: CNViewPreference.TextColorItem)
-        mControlColor               = super.loadColorValue(forKey: CNViewPreference.ControlColorItem)
-        mTerminalForegroundColor    = super.loadColorValue(forKey: CNViewPreference.TerminalForegroundColorItem)
-        mTerminalBackgroundColor    = super.loadColorValue(forKey: CNViewPreference.TerminalForegroundColorItem)
-        mGraphicsForegroundColor    = super.loadColorValue(forKey: CNViewPreference.GraphicsForegroundColorItem)
-        mGraphicsBackgroundColor    = super.loadColorValue(forKey: CNViewPreference.GraphicsBackgroundColorItem)
+                mControlColor               = super.loadColorValue(forKey: CNViewPreference.ControlColorItem)
+                mTerminalForegroundColor    = super.loadColorValue(forKey: CNViewPreference.TerminalForegroundColorItem)
+                mTerminalBackgroundColor    = super.loadColorValue(forKey: CNViewPreference.TerminalForegroundColorItem)
+                mGraphicsForegroundColor    = super.loadColorValue(forKey: CNViewPreference.GraphicsForegroundColorItem)
+                mGraphicsBackgroundColor    = super.loadColorValue(forKey: CNViewPreference.GraphicsBackgroundColorItem)
 	}
 
-    public func rootBackgroundColor(status stat: CNControlState) -> CNColor {
-        if let col = mRootBackgroundColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.rootBackgroundColor.color(for: style)
+        public func rootBackgroundColor(status stat: CNControlState) -> CNColor {
+            if let col = mRootBackgroundColor {
+                return col
+            } else {
+                let style = CNPreference.shared.systemPreference.style
+                return CNUIElementColors.rootBackgroundColor.color(for: style)
+            }
         }
-    }
 
-    public func controlBackgroundColor(status stat: CNControlState) -> CNColor {
-        if let col = mControlBackgroundColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.controlBackgroundColor.color(for: style)
+        public func controlBackgroundColor(status stat: CNControlState) -> CNColor {
+                if let col = mControlBackgroundColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.controlBackgroundColor.color(for: style)
+                }
         }
-    }
 
-	public func labelColor(status stat: CNControlState) -> CNColor {
-        if let col = mLabelColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.labelColor.color(for: style)
+        public func labelColor(status stat: CNControlState) -> CNColor {
+                if let col = mLabelColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.labelColor.color(for: style)
+                }
         }
-	}
 
-	public func textColor(status stat: CNControlState) -> CNColor {
-        if let col = mTextColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.textColor.color(for: style)
+        public func textColor(status stat: CNControlState) -> CNColor {
+                if let col = mTextColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.textColor.color(for: style)
+                }
         }
-	}
 
-    public func controlColor(status stat: CNControlState) -> CNColor {
-        if let col = mControlColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.controlColor.color(for: style)
+        public func controlColor(status stat: CNControlState) -> CNColor {
+                if let col = mControlColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.controlColor.color(for: style)
+                }
         }
-    }
 
-    public func terminalForegroundColor() -> CNColor {
-        if let col = mTerminalForegroundColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.terminalForegroundColor.color(for: style)
+        public func terminalForegroundColor() -> CNColor {
+                if let col = mTerminalForegroundColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.terminalForegroundColor.color(for: style)
+                }
         }
-    }
 
-    public func setTerminalForegroundColor(color col: CNColor) {
-        super.set(colorValue: col, forKey: CNViewPreference.TerminalForegroundColorItem)
-    }
-
-    public func terminalBackgroundColor() -> CNColor {
-        if let col = mTerminalBackgroundColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.terminalBackgroundColor.color(for: style)
+        public func setTerminalForegroundColor(color col: CNColor) {
+                super.set(colorValue: col, forKey: CNViewPreference.TerminalForegroundColorItem)
         }
-    }
 
-    public func setTerminalBackgroundColor(color col: CNColor) {
-        super.set(colorValue: col, forKey: CNViewPreference.TerminalBackgroundColorItem)
-    }
-
-    public func graphicsForegroundColor() -> CNColor {
-        if let col = mGraphicsForegroundColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.graphicsForegroundColor.color(for: style)
+        public func terminalBackgroundColor() -> CNColor {
+                if let col = mTerminalBackgroundColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.terminalBackgroundColor.color(for: style)
+                }
         }
-    }
 
-    public func graphicsBackgroundColor() -> CNColor {
-        if let col = mGraphicsBackgroundColor {
-            return col
-        } else {
-            let style = CNPreference.shared.systemPreference.style
-            return CNUIElementColors.shared.graphicsBackgroundColor.color(for: style)
+        public func setTerminalBackgroundColor(color col: CNColor) {
+                super.set(colorValue: col, forKey: CNViewPreference.TerminalBackgroundColorItem)
         }
-    }
+
+        public func graphicsForegroundColor() -> CNColor {
+                if let col = mGraphicsForegroundColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.graphicsForegroundColor.color(for: style)
+                }
+        }
+
+        public func graphicsBackgroundColor() -> CNColor {
+                if let col = mGraphicsBackgroundColor {
+                        return col
+                } else {
+                        let style = CNPreference.shared.systemPreference.style
+                        return CNUIElementColors.graphicsBackgroundColor.color(for: style)
+                }
+        }
 }
 
 public class CNTerminalPreference: CNPreferenceTable

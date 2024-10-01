@@ -7,24 +7,35 @@
 
 import Foundation
 
-public class CNPropertyList
+public final class CNPropertyList: Sendable
 {
-        private static var mLists: Dictionary<String, CNPropertyList> = [:]
+        public struct TypeDeclaration: Sendable {
+                public var typeIdentifier: String
+                public var fileExtension:  String
 
-        public static func load(bundleName bname: String?) -> CNPropertyList {
-                let rname = bname ?? "<main>"
-                if let list = mLists[rname] {
-                        return list
+                public init(typeIdentifier: String, fileExtension: String) {
+                        self.typeIdentifier = typeIdentifier
+                        self.fileExtension = fileExtension
                 }
-                let newlist = CNPropertyList()
-                if let name = bname {
-                        newlist.load(bundleName: name)
-                } else {
-                        newlist.load()
-                }
-                mLists[rname] = newlist
-                return newlist
         }
+
+        private let mVersionString:             String
+        private let mMinimumSystemVersion:      String
+        private let mTypeDeclarations:          Array<TypeDeclaration>
+
+        public var versionString: String                        { get { return mVersionString           }}
+        public var minimumSystemVersion: String                 { get { return mMinimumSystemVersion    }}
+        public var typeDeclarations: Array<TypeDeclaration>     { get { return mTypeDeclarations        }}
+
+        public init(versionString version: String, minimumSystemVersion minver: String, typeDeclarations decls: Array<TypeDeclaration>) {
+                mVersionString          = version
+                mMinimumSystemVersion   = minver
+                mTypeDeclarations       = decls
+        }
+
+        //public var description: String { get {
+        //      return "{typeIdentifier: \(mTypeIdentifier), fileExtension: \(mFileExtension)}"
+        //}}
 
         /*
          <key>UTImportedTypeDeclarations</key>
@@ -54,21 +65,143 @@ public class CNPropertyList
                          </dict>
                  </array>
          */
-        public struct TypeDeclaration {
-                private var mTypeIdentifier:    String
-                private var mFileExtension:     String
-
-                public var typeIdentifier:      String  { get { return mTypeIdentifier  }}
-                public var fileExtension:       String  { get { return mFileExtension   }}
-
-                public init(typeIdentifier: String, fileExtension: String) {
-                        self.mTypeIdentifier    = typeIdentifier
-                        self.mFileExtension     = fileExtension
+        public static func parsePropertyList(propertyList plist: Dictionary<String, Any>) -> CNPropertyList {
+                /* CFBundleShortVersionString:1.0 */
+                var version = ""
+                if let str = plist["CFBundleShortVersionString"] as? String {
+                        version = str
                 }
+                /* LSMinimumSystemVersion:14.4 */
+                var minsys  = ""
+                if let str = plist["LSMinimumSystemVersion"] as? String {
+                        minsys = str
+                }
+                /* ImportedTypeDeclarations */
+                var typedecls: Array<TypeDeclaration> = []
+                if let decls = plist["UTImportedTypeDeclarations"] as? Array<Any> {
+                        for decl in decls {
+                                if let tdecl = decl as? Dictionary<String, Any> {
+                                        let result = parseTypeDeclaration(decl: tdecl)
+                                        typedecls.append(result)
+                                }
+                        }
+                }
+                return CNPropertyList(versionString: version, minimumSystemVersion: minsys, typeDeclarations: typedecls)
+        }
 
-                public var description: String { get {
-                        return "{typeIdentifier: \(mTypeIdentifier), fileExtension: \(mFileExtension)}"
-                }}
+        private static func parseTypeDeclaration(decl dtype: Dictionary<String, Any>) -> TypeDeclaration {
+                var ident: String
+                if let str = dtype["UTTypeIdentifier"] as? String {
+                        ident = str
+                } else {
+                        CNLog(logLevel: .error, message: "No UTTypeIdentifier", atFunction: #function, inFile: #file)
+                        ident = ""
+                }
+                var fileext: String = ""
+                if let dict = dtype["UTTypeTagSpecification"] as? Dictionary<String, Any> {
+                        if let exts = dict["public.filename-extension"] as? Array<String> {
+                                if exts.count > 0 {
+                                        fileext = exts[0]
+                                }
+                        }
+                } else {
+                        CNLog(logLevel: .error, message: "No UTTypeTagSpecification", atFunction: #function, inFile: #file)
+                }
+                return TypeDeclaration(typeIdentifier: ident, fileExtension: fileext)
+        }
+
+        public static func loadFromBundle(name nm: String) -> CNPropertyList? {
+                var result: CNPropertyList? = nil
+                Task { result = await CNPropertyFile.shared.loadFromBundle(name: nm) }
+                return result
+        }
+
+        public static func loadFromMainBundle() -> CNPropertyList? {
+                var result: CNPropertyList? = nil
+                Task { result = await CNPropertyFile.shared.loadFromMainBundle() }
+                return result
+        }
+}
+
+public actor CNPropertyFile
+{
+        public static let shared = CNPropertyFile()
+
+        private var mPropertyLists: Dictionary<String, CNPropertyList>
+        private static let MainBundleName: String = "$main"
+
+        private init() {
+                mPropertyLists = [:]
+        }
+
+        public func loadFromBundle(name nm: String) -> CNPropertyList? {
+                if let list = mPropertyLists[nm] {
+                        return list
+                } else {
+                        guard let bpath = CNPropertyFile.bundlePath(bundleName: nm) else {
+                                CNLog(logLevel: .error, message: "Failed to get bundle path", atFunction: #function, inFile: #file)
+                                return nil
+                        }
+                        if let plist = NSDictionary(contentsOfFile: bpath) as? Dictionary<String, Any> {
+                                let newlist = CNPropertyList.parsePropertyList(propertyList: plist)
+                                mPropertyLists[nm] = newlist
+                                return newlist
+                        } else {
+                                CNLog(logLevel: .error, message: "Info.plist form \(nm) bundle is not found",
+                                      atFunction: #function, inFile: #file)
+                                return nil
+                        }
+                }
+        }
+
+        public func loadFromMainBundle() -> CNPropertyList? {
+                if let list = mPropertyLists[CNPropertyFile.MainBundleName] {
+                        return list
+                } else {
+                        if let plist = Bundle.main.infoDictionary {
+                                let newlist = CNPropertyList.parsePropertyList(propertyList: plist)
+                                mPropertyLists[CNPropertyFile.MainBundleName] = newlist
+                                return newlist
+                        } else {
+                                CNLog(logLevel: .error, message: "Info.plist form main bundle is not found",
+                                      atFunction: #function, inFile: #file)
+                                return nil
+                        }
+                }
+        }
+
+        private static func bundlePath(bundleName bname: String) -> String? {
+                if let path = Bundle.main.path(forResource: "Info", ofType: "plist", inDirectory: bname + "/Contents") {
+                        return path
+                } else {
+                        return nil
+                }
+        }
+}
+
+/*
+public class CNPropertyList
+{
+        private static var mLists: Dictionary<String, CNPropertyList> = [:]
+
+        public static func load(bundleName bname: String?) -> CNPropertyList {
+                let rname = bname ?? "<main>"
+                if let list = mLists[rname] {
+                        return list
+                }
+                let newlist = CNPropertyList()
+                if let name = bname {
+                        newlist.load(bundleName: name)
+                } else {
+                        newlist.load()
+                }
+                mLists[rname] = newlist
+                return newlist
+        }
+
+
+        public struct TypeDeclaration {
+
         }
 
         private var mVersionString:             String
@@ -86,11 +219,7 @@ public class CNPropertyList
         }
 
         private func load() {
-                if let plist = Bundle.main.infoDictionary {
-                        load(dictionary: plist)
-                } else {
-                        CNLog(logLevel: .error, message: "Info.plist is not found", atFunction: #function, inFile: #file)
-                }
+
         }
 
         private func load(bundleName bname: String) {
@@ -101,14 +230,6 @@ public class CNPropertyList
                         }
                 }
                 CNLog(logLevel: .error, message: "Info.plist is not found", atFunction: #function, inFile: #file)
-        }
-
-        private static func mainBundlePath(bundleName bname: String) -> String? {
-                if let path = Bundle.main.path(forResource: "Info", ofType: "plist", inDirectory: bname + "/Contents") {
-                        return path
-                } else {
-                        return nil
-                }
         }
 
         private func load(dictionary plist: Dictionary<String, Any>) {
@@ -132,24 +253,7 @@ public class CNPropertyList
         }
 
         private func parseTypeDeclaration(decl dtype: Dictionary<String, Any>) -> TypeDeclaration {
-                var ident: String
-                if let str = dtype["UTTypeIdentifier"] as? String {
-                        ident = str
-                } else {
-                        CNLog(logLevel: .error, message: "No UTTypeIdentifier", atFunction: #function, inFile: #file)
-                        ident = ""
-                }
-                var fileext: String = ""
-                if let dict = dtype["UTTypeTagSpecification"] as? Dictionary<String, Any> {
-                        if let exts = dict["public.filename-extension"] as? Array<String> {
-                                if exts.count > 0 {
-                                        fileext = exts[0]
-                                }
-                        }
-                } else {
-                        CNLog(logLevel: .error, message: "No UTTypeTagSpecification", atFunction: #function, inFile: #file)
-                }
-                return TypeDeclaration(typeIdentifier: ident, fileExtension: fileext)
+
          }
 
         public func dump() {
@@ -160,4 +264,5 @@ public class CNPropertyList
                 }
         }
 }
+*/
 

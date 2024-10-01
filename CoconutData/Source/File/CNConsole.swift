@@ -51,21 +51,20 @@ public class CNDefaultConsole: CNConsole
 
 public class CNFileConsole : CNConsole
 {
-	public var inputFile:		CNFile
-	public var outputFile:		CNFile
-	public var errorFile:		CNFile
+	public var inputFile:		CNInputFile
+	public var outputFile:		CNOutputFile
+	public var errorFile:		CNOutputFile
 
-	public init(input ifile: CNFile, output ofile: CNFile, error efile: CNFile){
+	public init(input ifile: CNInputFile, output ofile: CNOutputFile, error efile: CNOutputFile){
 		inputFile	= ifile
 		outputFile	= ofile
 		errorFile	= efile
 	}
 
 	public init() {
-		let files = CNStandardFiles.shared
-		inputFile	= files.input
-		outputFile	= files.output
-		errorFile	= files.error
+                inputFile	= CNStandardFiles.input
+                outputFile	= CNStandardFiles.output
+                errorFile	= CNStandardFiles.error
 	}
 
 	public func print(string str: String){

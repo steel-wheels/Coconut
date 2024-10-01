@@ -32,18 +32,16 @@ public class CNUTTypeManager
 	}
 
 	private func loadPlist() {
-                //NSLog("loadPlist")
-		let plist  = CNPropertyList.load(bundleName: nil)
-                //plist.dump()
-		let decls = plist.typeDeclarations
-		for decl in decls {
-			if let utype = UTType(decl.typeIdentifier) {
-                                add(uniformType: utype, fileExtension: decl.fileExtension)
-                                NSLog("UTI: \(utype.identifier)")
-			} else {
-				NSLog("Unsupported type identifier: \(decl.typeIdentifier)")
-			}
-		}
+                if let plist  = CNPropertyList.loadFromMainBundle() {
+                        for decl in plist.typeDeclarations {
+                                if let utype = UTType(decl.typeIdentifier) {
+                                        add(uniformType: utype, fileExtension: decl.fileExtension)
+                                        NSLog("UTI: \(utype.identifier)")
+                                } else {
+                                        NSLog("Unsupported type identifier: \(decl.typeIdentifier)")
+                                }
+                        }
+                }
 	}
 
         private func add(uniformType ctype: UTType, fileExtension fext: String){

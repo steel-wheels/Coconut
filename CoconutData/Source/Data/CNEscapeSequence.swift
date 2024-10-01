@@ -15,18 +15,6 @@ public class CNEscapeSequences
 {
 	public static let InterfaceName = "EscapeSequencesIF"
 
-	private static var mShared: CNEscapeSequences? = nil
-
-	public static var shared: CNEscapeSequences { get {
-		if let result = CNEscapeSequences.mShared {
-			return result
-		} else {
-			let newobj = CNEscapeSequences()
-			CNEscapeSequences.mShared = newobj
-			return newobj
-		}
-	}}
-
 	static func allocateInterfaceType(escapeSequenceIF eseq: CNInterfaceType, colorIF colif: CNInterfaceType) -> CNInterfaceType {
 		let etype: CNValueType = .interfaceType(eseq)
 		typealias M = CNInterfaceType.Member
@@ -75,6 +63,9 @@ public class CNEscapeSequences
 		]
 		return CNInterfaceType(name: InterfaceName, base: nil, members: members)
 	}
+
+        public init(){
+        }
 
 	public func str(string str: String) -> CNEscapeSequence {
 		return CNEscapeSequence(escapeCode: .string(str))

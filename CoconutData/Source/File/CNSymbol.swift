@@ -293,52 +293,41 @@ private class CNOneSymbolImages
 
 public class CNSymbolImages
 {
-    private static var mShared: CNSymbolImages? = nil
+        private var mImageSymbols:      Dictionary<String, CNOneSymbolImages>
+        private var mMaxSymbolSizes:    Dictionary<CNSymbolSize, CGSize>
 
-    public static var shared: CNSymbolImages { get {
-        if let imgs = mShared {
-            return imgs
-        } else {
-            let newimgs = CNSymbolImages()
-            mShared = newimgs
-            return newimgs
+        public init() {
+                mImageSymbols   = [:]
+                mMaxSymbolSizes = [:]
         }
-    }}
 
-    private var mImageSymbols:      Dictionary<String, CNOneSymbolImages>
-    private var mMaxSymbolSizes:    Dictionary<CNSymbolSize, CGSize>
-    private init() {
-        mImageSymbols   = [:]
-        mMaxSymbolSizes = [:]
-    }
-
-    public func load(name nm: String, size sz: CNSymbolSize) -> CNImage {
-        let oneimgs: CNOneSymbolImages
-        if let imgs = mImageSymbols[nm] {
-            oneimgs = imgs
-        } else {
-            let newimgs = CNOneSymbolImages(symbolName: nm)
-            mImageSymbols[nm] = newimgs
-            oneimgs = newimgs
+        public func load(name nm: String, size sz: CNSymbolSize) -> CNImage {
+                let oneimgs: CNOneSymbolImages
+                if let imgs = mImageSymbols[nm] {
+                        oneimgs = imgs
+                } else {
+                        let newimgs = CNOneSymbolImages(symbolName: nm)
+                        mImageSymbols[nm] = newimgs
+                        oneimgs = newimgs
+                }
+                let img = oneimgs.load(size: sz)
+                updateMaxSize(symbolSize: sz, imageSize: img.size)
+                return img
         }
-        let img = oneimgs.load(size: sz)
-        updateMaxSize(symbolSize: sz, imageSize: img.size)
-        return img
-    }
 
-    public func maxSize(symbolSize sz: CNSymbolSize) -> CGSize {
-        if let z = mMaxSymbolSizes[sz] {
-            return z
-        } else {
-            return CGSize.zero
+        public func maxSize(symbolSize sz: CNSymbolSize) -> CGSize {
+                if let z = mMaxSymbolSizes[sz] {
+                        return z
+                } else {
+                        return CGSize.zero
+                }
         }
-    }
 
-    private func updateMaxSize(symbolSize ssize: CNSymbolSize, imageSize isize: CGSize) {
-        let cursize = maxSize(symbolSize: ssize)
-        let maxwidth  = max(cursize.width,  isize.width)
-        let maxheight = max(cursize.height, isize.height)
-        mMaxSymbolSizes[ssize] = CGSize(width: maxwidth, height: maxheight)
-    }
+        private func updateMaxSize(symbolSize ssize: CNSymbolSize, imageSize isize: CGSize) {
+                let cursize = maxSize(symbolSize: ssize)
+                let maxwidth  = max(cursize.width,  isize.width)
+                let maxheight = max(cursize.height, isize.height)
+                mMaxSymbolSizes[ssize] = CGSize(width: maxwidth, height: maxheight)
+        }
 }
 

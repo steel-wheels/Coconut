@@ -94,7 +94,7 @@ open class CNProcess: CNProcessProtocol
 		get { return mProcessId }
 	}
 
-	public init(input ifile: CNFile, output ofile: CNFile, error efile: CNFile, terminationHander termhdlr: TerminationHandler?)
+	public init(input ifile: CNInputFile, output ofile: CNOutputFile, error efile: CNOutputFile, terminationHander termhdlr: TerminationHandler?)
 	{
 		mProcessId		= 0 // will be overwrite
 		mStatus			= .idle

@@ -53,22 +53,5 @@ open class CNApplicationDelegate: CNApplicationDelegateSuper, CNApplicationDeleg
 	open func applicationWillTerminate(_ application: UIApplication) {
 	}
 	#endif
-
-	#if os(OSX)
-	open func application(_ sender: NSApplication, delegateHandlesKey key: String) -> Bool {
-		let mgr = CNAppleEventManager.shared()
-		return mgr.hasProperty(named: key)
-	}
-
-	open override func value(forKey key: String) -> Any? {
-		let mgr = CNAppleEventManager.shared()
-		return mgr.property(forKey: key)
-	}
-
-	open override func setValue(_ value: Any?, forKey key: String) {
-		let mgr = CNAppleEventManager.shared()
-		mgr.setProperty(value, forKey: key)
-	}
-	#endif
 }
 

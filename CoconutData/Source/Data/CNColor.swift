@@ -257,65 +257,57 @@ extension CNColor: CNColorProtocol
 
 public class CNUIElementColors
 {
-    public struct AppearanceColor {
-        var light:  CNColor
-        var dark:   CNColor
+        public struct AppearanceColor {
+            var light:  CNColor
+            var dark:   CNColor
 
-        public init(light: CNColor, dark: CNColor) {
-            self.light  = light
-            self.dark   = dark
-        }
+            public init(light: CNColor, dark: CNColor) {
+                self.light  = light
+                self.dark   = dark
+            }
 
-        public func color(for style: CNInterfaceStyle) -> CNColor {
-            switch style {
-            case .light:    return self.light
-            case .dark:     return self.dark
+            public func color(for style: CNInterfaceStyle) -> CNColor {
+                switch style {
+                case .light:    return self.light
+                case .dark:     return self.dark
+                }
             }
         }
-    }
 
-    private static var mShared: CNUIElementColors? = nil
+        public static var rootBackgroundColor: AppearanceColor { get {
+                return AppearanceColor(light: CNColor.white, dark: CNColor.black)
+        }}
 
-    public static var shared: CNUIElementColors { get {
-        if let obj = mShared {
-            return obj
-        } else {
-            let newobj = CNUIElementColors()
-            mShared    = newobj
-            return newobj
-        }
-    }}
+        public static var labelColor: AppearanceColor { get {
+                return AppearanceColor(light: CNColor.blue,  dark: CNColor.cyan)
+        }}
 
-    private var mRootBackgroundColor:           AppearanceColor
-    private var mLabelColor:                    AppearanceColor
-    private var mTextColor:                     AppearanceColor
-    private var mControlColor:                  AppearanceColor
-    private var mControlBackgroundColor:        AppearanceColor
-    private var mTerminalForegroundColor:       AppearanceColor
-    private var mTerminalBackgroundColor:       AppearanceColor
-    private var mGraphicsForegroundColor:       AppearanceColor
-    private var mGraphicsBackgroundColor:       AppearanceColor
+        public static var textColor: AppearanceColor { get {
+                return labelColor
+        }}
 
-    public var rootBackgroundColor:     AppearanceColor { get { return mRootBackgroundColor     }}
-    public var labelColor:              AppearanceColor { get { return mLabelColor              }}
-    public var textColor:               AppearanceColor { get { return mTextColor               }}
-    public var controlColor:            AppearanceColor { get { return mControlColor            }}
-    public var controlBackgroundColor:  AppearanceColor { get { return mControlBackgroundColor  }}
-    public var terminalForegroundColor: AppearanceColor { get { return mTerminalForegroundColor }}
-    public var terminalBackgroundColor: AppearanceColor { get { return mTerminalBackgroundColor }}
-    public var graphicsForegroundColor: AppearanceColor { get { return mGraphicsForegroundColor }}
-    public var graphicsBackgroundColor: AppearanceColor { get { return mGraphicsBackgroundColor }}
+        public static var controlColor: AppearanceColor { get {
+                return labelColor
+        }}
 
-    private init() {
-        mRootBackgroundColor        = AppearanceColor(light: CNColor.white, dark: CNColor.black)
-        mLabelColor                 = AppearanceColor(light: CNColor.blue,  dark: CNColor.cyan)
-        mTextColor                  = mLabelColor
-        mControlColor               = mLabelColor
-        mControlBackgroundColor     = mRootBackgroundColor
-        mTerminalForegroundColor    = mLabelColor
-        mTerminalBackgroundColor    = mRootBackgroundColor
-        mGraphicsForegroundColor    = mLabelColor
-        mGraphicsBackgroundColor    = mRootBackgroundColor
-    }
+        public static var controlBackgroundColor: AppearanceColor { get {
+                return rootBackgroundColor
+        }}
+
+        public static var terminalForegroundColor: AppearanceColor { get {
+                return labelColor
+        }}
+
+        public static var terminalBackgroundColor: AppearanceColor { get {
+                return rootBackgroundColor
+        }}
+
+        public static var graphicsForegroundColor: AppearanceColor { get {
+                return labelColor
+        }}
+
+        public static var graphicsBackgroundColor: AppearanceColor { get {
+                return rootBackgroundColor
+        }}
 }
 

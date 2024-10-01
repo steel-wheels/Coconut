@@ -16,8 +16,6 @@ import Foundation
 
 public class CNRGBColorTable
 {
-	static let sharedTable = CNRGBColorTable()
-
 	private static func rgb(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat) -> CNColor {
 		#if os(iOS)
 		return UIColor(red: r, green: g, blue: b, alpha: 1.0)
