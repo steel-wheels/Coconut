@@ -12,7 +12,7 @@ public enum CNAxis: Int
 	case horizontal
 	case vertical
 
-	public static var TypeName = "Axis"
+	public static let TypeName = "Axis"
 
 	public var description: String {
 		let result: String
@@ -39,7 +39,7 @@ public enum CNAlignment: Int {
 	case fill
 	case center
 
-	public static var TypeName = "Alignment"
+	public static let TypeName = "Alignment"
 
 	public static func allocateEnumType() -> CNEnumType {
 		let alignment = CNEnumType(typeName: CNAlignment.TypeName)
@@ -160,7 +160,7 @@ public enum CNAnimationState: Int {
 	case	run
 	case	pause
 
-	public static var TypeName = "AnimationState"
+	public static let TypeName = "AnimationState"
 
 	public static func allocateEnumType() -> CNEnumType {
 		let animstate = CNEnumType(typeName: CNAnimationState.TypeName)

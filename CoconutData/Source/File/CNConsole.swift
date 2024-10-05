@@ -82,8 +82,7 @@ public class CNFileConsole : CNConsole
 	}
 
 	public func log(string str: String){
-		let cons = CNLogManager.shared.console
-		cons.print(string: str)
+                CNLog(message: str)
 	}
 
 	public func scan() -> String? {
@@ -192,8 +191,7 @@ public class CNBufferedConsole: CNConsole
 		if let cons = mOutputConsole {
 			cons.log(string: str)
 		} else {
-			let cons = CNLogManager.shared.console
-			cons.print(string: str)
+                        CNLog(message: str)
 		}
 	}
 

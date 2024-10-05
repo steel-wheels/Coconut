@@ -24,29 +24,29 @@ private class CNProcessInfo
 	public var children: Array<Int> { get { return mChildren }}
 }
 
-public class CNProcessManager
+public actor CNProcessManager
 {
-	private static var mShared: CNProcessManager? = nil
-
-	public static var shared: CNProcessManager {
-		if let pmgr = mShared {
-			return pmgr
-		} else {
-			let newmgr = CNProcessManager()
-			mShared = newmgr
-			return newmgr
-		}
-	}
+        private static var mShared: CNProcessManager = CNProcessManager()
 
 	private var mProcesses: Dictionary<Int, CNProcessInfo>
 	private var mNextProcessId: Int
+
+        public static func addProcess(process proc: CNProcessProtocol) -> Int {
+                var result: Int = 0
+                Task { result = await mShared.addProcess(process: proc) }
+                return result
+        }
+
+        public static func remove(processId pid: Int) {
+                Task { await mShared.remove(processId: pid)}
+        }
 
 	private init() {
 		mProcesses     = [:]
 		mNextProcessId = 0
 	}
 
-	public func addProcess(process proc: CNProcessProtocol) -> Int {
+	private func addProcess(process proc: CNProcessProtocol) -> Int {
 		let newpid     =  mNextProcessId
 		mNextProcessId += 1
 
@@ -56,7 +56,7 @@ public class CNProcessManager
 		return newpid
 	}
 
-	public func remove(processId pid: Int) {
+	private func remove(processId pid: Int) {
 		if let pinfo = mProcesses[pid] {
 			/* remove children */
 			for cid in pinfo.children {
@@ -71,51 +71,4 @@ public class CNProcessManager
 	}
 
 }
-
-/*
-public class CNProcessManager
-{
-	private var 	mNextProcessId:		Int
-	private var	mProcesses:		Dictionary<Int, CNProcessProtocol>
-	private var 	mChildProcessManager:	Array<CNProcessManager>
-
-	public var childProcessManagers: Array<CNProcessManager> { get { return mChildProcessManager }}
-
-	public init() {
-		mNextProcessId		= 0
-		mProcesses		= [:]
-		mChildProcessManager	= []
-	}
-
-	public func addProcess(process proc: CNProcessProtocol) -> Int {
-		let pid = mNextProcessId
-		mProcesses[pid] = proc
-		mNextProcessId  += 1
-		return pid
-	}
-
-	public func removeProcess(process proc: CNProcessProtocol) {
-		if let pid = proc.processId {
-			mProcesses.removeValue(forKey: pid)
-		} else {
-			CNLog(logLevel: .error, message: "Process with no pid", atFunction: #function, inFile: #file)
-		}
-	}
-
-	public func addChildManager(childManager mgr: CNProcessManager){
-		mChildProcessManager.append(mgr)
-	}
-
-	public func terminate() {
-		/* Terminate children first */
-		for child in mChildProcessManager {
-			child.terminate()
-		}
-		/* Terminate all processes */
-		for process in mProcesses.values {
-			process.terminate()
-		}
-	}
-}
-*/
 

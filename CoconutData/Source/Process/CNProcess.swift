@@ -102,7 +102,7 @@ open class CNProcess: CNProcessProtocol
 		mTerminationHandler	= termhdlr
 		mConsole		= CNFileConsole(input: ifile, output: ofile, error: efile)
 
-		mProcessId = CNProcessManager.shared.addProcess(process: self)
+		mProcessId = CNProcessManager.addProcess(process: self)
 
 		mProcess.standardInput		= ifile.fileHandle
 		mProcess.standardOutput		= ofile.fileHandle
@@ -137,7 +137,7 @@ open class CNProcess: CNProcessProtocol
 
 	deinit {
 		/* Remove from parent */
-		CNProcessManager.shared.remove(processId: mProcessId)
+		CNProcessManager.remove(processId: mProcessId)
 	}
 
 	public func execute(command cmd: String) {
