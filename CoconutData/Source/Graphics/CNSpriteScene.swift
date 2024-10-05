@@ -120,8 +120,9 @@ public class CNSpriteScene: SKScene
 
 			/* Wait node run  */
 			let trigger = self.trigger
-			trigger.trigger()
-			while trigger.isRunning() {
+
+                        CNTrigger.trigger(object: trigger)
+                        while CNTrigger.isRunning(object: trigger) {
 				/* wait finish running */
 				Thread.sleep(forTimeInterval: 0.0001)
 			}
@@ -130,12 +131,12 @@ public class CNSpriteScene: SKScene
 			var runnodes: Array<SKNode> = []
 			for node in self.children {
 				if node.isMovable {
-					node.trigger.trigger()
+                                        CNTrigger.trigger(object: node.trigger)
 					runnodes.append(node)
 				}
 			}
 			for node in runnodes {
-				while node.trigger.isRunning() {
+                                while CNTrigger.isRunning(object: node.trigger) {
 					/* wait finish running */
 					Thread.sleep(forTimeInterval: 0.0001)
 				}

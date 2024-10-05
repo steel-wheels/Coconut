@@ -8,7 +8,7 @@
 import Foundation
 
 /* Send trigger notification to the other proceess */
-@objc public class CNTrigger: NSObject
+@objc public actor CNTrigger: NSObject, Sendable
 {
 	private static let InterfaceName	= "TriggerIF"
 	private static let TriggerItem		= "trigger"
@@ -36,22 +36,35 @@ import Foundation
 		super.init()
 	}
 
-	public func trigger() {
+	private func trigger() {
 		if !mIsRunning {
 			//NSLog("Trigger: \(mName)")
 			mIsRunning = true
 		}
 	}
 
-	public func isRunning() -> Bool {
+        public static func trigger(object obj: CNTrigger) {
+                Task.detached { await obj.trigger() }
+        }
+
+	private func isRunning() -> Bool {
 		return mIsRunning
 	}
 
-	public func ack() {
+        public static func isRunning(object obj: CNTrigger) -> Bool {
+                var result: Bool = false
+                Task { result = await obj.isRunning() }
+                return result
+        }
+
+	private func ack() {
 		if mIsRunning {
 			//NSLog("Ack: \(mName)")
 			mIsRunning = false
 		}
 	}
-}
 
+        public static func ack(object obj: CNTrigger) {
+                Task.detached { await obj.ack() }
+        }
+}
