@@ -57,27 +57,32 @@ public class CNSpriteNodeRef
 		return CNInterfaceType(name: InterfaceName, base: nil, members: members)
 	}
 
-	private var mSize: 	CGSize
-	private var mNodes:	Array<CNSpriteNodeRef>
+	private let mSize: 	CGSize
+	private let mNodes:	Array<CNSpriteNodeRef>
 
-	public var nodes: Array<CNSpriteNodeRef> { get { return mNodes }}
+        public var nodes: Array<CNSpriteNodeRef> { get { return mNodes }}
+        public var size:  CGSize { get { return mSize }}
 
-	public var size: CGSize {
-		get		{ return mSize }
-		set(newsz)	{ mSize = newsz }
-	}
+        public init(size sz: CGSize, nodes nds: Array<CNSpriteNodeRef>) {
+                self.mSize      = sz
+                self.mNodes     = nds
+                super.init()
+        }
+        
+        public static func zero() -> CNSpriteField {
+                return CNSpriteField(size: CGSize.zero, nodes: [])
+        }
 
-	public override init() {
-		self.mSize	= CGSize.zero
-		self.mNodes	= []
-		super.init()
-	}
-
-	public func clearNodes() {
-		self.mNodes	= []
-	}
-
-	public func appendNode(nodeRef nref: CNSpriteNodeRef){
-		self.mNodes.append(nref)
-	}
+        public static func clone(source src: CNSpriteField, withSize size: CGSize) -> CNSpriteField {
+                return CNSpriteField(size: size, nodes: src.nodes)
+        }
+        
+        public static func clone(source src: CNSpriteField, withNodes nodes: Array<CNSpriteNodeRef>) -> CNSpriteField {
+                return CNSpriteField(size: src.size, nodes: nodes)
+        }
+        
+        public static func clone(source src: CNSpriteField, withAppendingNodes node: CNSpriteNodeRef) -> CNSpriteField {
+                var nodes = src.nodes ; nodes.append(node)
+                return CNSpriteField(size: src.size, nodes: nodes)
+        }
 }

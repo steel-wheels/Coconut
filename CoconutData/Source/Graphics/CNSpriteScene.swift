@@ -47,8 +47,7 @@ public class CNSpriteScene: SKScene
 		world.speed    = 1.0 // default
 
 		// update field size
-		self.field = CNSpriteField()
-		self.field.size = self.frame.size
+                self.field = CNSpriteField(size: self.frame.size, nodes: [])
 	}
 
 	public func setupCallbacks(initCallback ifunc: @escaping InitCallback, finishCallback ffunc: @escaping FinishCallback) {
@@ -60,7 +59,7 @@ public class CNSpriteScene: SKScene
 		get { return super.size }
 		set(newsize){
 			super.size = newsize
-			self.field.size = newsize
+                        self.field = CNSpriteField.clone(source: self.field, withSize: newsize)
 			if let bgnode = mBackgroundNode {
 				bgnode.position = CGPoint(x: size.width/2.0, y: size.height/2.0)
 			}
@@ -102,8 +101,7 @@ public class CNSpriteScene: SKScene
 
 		if mIs1stUpdate {
 			/* update field info */
-			self.field.clearNodes()
-
+                        self.field = CNSpriteField.clone(source: self.field, withNodes: [])
 			/* call init function only once */
 			if let cbfunc = mInitCallback {
 				if !cbfunc() {
@@ -146,7 +144,7 @@ public class CNSpriteScene: SKScene
 	}
 
 	private func updateAllFieldInfo() {
-		self.field.clearNodes()
+		self.field = CNSpriteField.clone(source: self.field, withNodes: [])
 		for node in self.children {
 			if node.isMovable {
 				updateFieldInfo(node: node)
@@ -158,7 +156,7 @@ public class CNSpriteScene: SKScene
 		let newref = CNSpriteNodeRef(material: nd.material,
 					     nodeId: nd.nodeId,
 					     position: nd.position)
-		self.field.appendNode(nodeRef: newref)
+                self.field = CNSpriteField.clone(source: self.field, withAppendingNodes: newref)
 	}
 
 	private func removeRetiredNodes() {

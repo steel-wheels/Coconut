@@ -255,7 +255,7 @@ public extension SKNode
 
 			newdict.setObject(NSNumber(floatLiteral: 0.0), forKey: CurrentTimeItem as NSString)
 			newdict.setObject(CNSpriteActions(), forKey: ActionsItem as NSString)
-			newdict.setObject(CNSpriteField(), forKey: FieldItem as NSString)
+                        newdict.setObject(CNSpriteField.zero, forKey: FieldItem as NSString)
 			newdict.setObject(NSNull(), forKey: ScriptContextItem as NSString)
 
 			return newdict
@@ -335,7 +335,7 @@ public extension SKNode
 				return fldobj
 			} else {
 				CNLog(logLevel: .error, message: "No valid field item", atFunction: #function, inFile: #file)
-				return CNSpriteField()
+                                return CNSpriteField.zero()
 			}
 		}
 		set(fld){
